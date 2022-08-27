@@ -6,6 +6,7 @@ describe("crud", () => {
    let page
  
    beforeAll(async () => {
+       
        browser = await puppeteer.launch({ headless: false })
        page = await browser.newPage()
        await page.goto(`file://${__dirname}/index.html`)
@@ -185,58 +186,58 @@ describe("crud", () => {
     // }, 7000)
 
 
-    it ('EXCLUIR USUÁRIO', async () => {
-        await page.focus('#delete-0')
-        await page.click('#delete-0')
-        page.on('dialog', dialogHandler);
-        await page.click('#root > div > div > div.ToDoInput > button')
+    // it ('EXCLUIR USUÁRIO', async () => {
+    //     await page.focus('#delete-0')
+    //     await page.click('#delete-0')
+    //     page.on('dialog', dialogHandler);
+    //     await page.click('#root > div > div > div.ToDoInput > button')
         
-        await page.screenshot({ path: 'deletarUsuario.png'})
+    //     await page.screenshot({ path: 'deletarUsuario.png'})
 
-    })
+    // })
     
 
-   // it('Criar Usuario com saveClient()', async () => {
+   it('Criar Usuario com saveClient()', async () => {
  
  
-   //     const nome = await page.evaluate(() => document.getElementById('nome').value = "vanessa");
-   //     const email = await page.evaluate (() => document.getElementById('email').value = "vanessapontes@gmail.com");
-   //     const celular = await page.evaluate (() => document.getElementById('celular').value = "84 9999999");
-   //     const cidade = await page.evaluate(() => document.getElementById('cidade').value = "Acari");
+       const nome = await page.evaluate(() => document.getElementById('nome').value = "vanessa");
+       const email = await page.evaluate (() => document.getElementById('email').value = "vanessapontes@gmail.com");
+       const celular = await page.evaluate (() => document.getElementById('celular').value = "84 9999999");
+       const cidade = await page.evaluate(() => document.getElementById('cidade').value = "Acari");
  
-   //     const saveClient = await page.evaluate(() => saveClient());
-   //     await page.waitForTimeout(2000)
-   //     const readClient = await page.evaluate(() => readClient());
-   //     await page.screenshot({ path: 'salvar.png' })
-   //     await expect(saveClient).not.toBeNull();
+       const saveClient = await page.evaluate(() => saveClient());
+       await page.waitForTimeout(2000)
+       const readClient = await page.evaluate(() => readClient().lenght);
+       await page.screenshot({ path: 'salvar.png' })
+       await expect(saveClient).not.toBe(1);
  
-   // });
+   });
  
-   // it('Deletar Usuario', async () => {
-   //     const nome = await page.evaluate(() => document.getElementById('nome').value = "vanessa");
-   //     const email = await page.evaluate (() => document.getElementById('email').value = "vanessapontes@gmail.com");
-   //     const celular = await page.evaluate (() => document.getElementById('celular').value = "84 99999999");
-   //     const cidade = await page.evaluate(() => document.getElementById('cidade').value = "Acari");
+   it('Deletar Usuario com DeleteClient()', async () => {
+       const nome = await page.evaluate(() => document.getElementById('nome').value = "vanessa");
+       const email = await page.evaluate (() => document.getElementById('email').value = "vanessapontes@gmail.com");
+       const celular = await page.evaluate (() => document.getElementById('celular').value = "84 99999999");
+       const cidade = await page.evaluate(() => document.getElementById('cidade').value = "Acari");
  
-   //     const saveClient = await page.evaluate(() => saveClient.call());
-   //     const deleteClient = await page.evaluate(() => deleteClient(1));
-   //     const array = await page.evaluate(() => readClient());
-   //     await page.screenshot({ path: 'DELETARR.png'})
-   //     await expect(array).toBe(1);
-   // });
+       const saveClient = await page.evaluate(() => saveClient.call());
+       const deleteClient = await page.evaluate(() => deleteClient(0));
+       const array = await page.evaluate(() => readClient());
+       await page.screenshot({ path: 'DELETAR.png'})
+       await expect(array).toBe(0);
+   });
  
-   // it('Editar Usuario', async () => {
-   //     const nome = await page.evaluate(() => document.getElementById('nome').value = "vanessa");
-   //     const email = await page.evaluate (() => document.getElementById('email').value = "vanessapontes@gmail.com");
-   //     const celular = await page.evaluate (() => document.getElementById('celular').value = "84 99999999");
-   //     const cidade = await page.evaluate(() => document.getElementById('cidade').value = "Acari");
+   it('Editar Usuario com updateClient', async () => {
+       const nome = await page.evaluate(() => document.getElementById('nome').value = "vanessa");
+       const email = await page.evaluate (() => document.getElementById('email').value = "vanessapontes@gmail.com");
+       const celular = await page.evaluate (() => document.getElementById('celular').value = "84 99999999");
+       const cidade = await page.evaluate(() => document.getElementById('cidade').value = "Acari");
  
-   //     const saveClient = await page.evaluate(() => saveClient.call());
-   //     const updateClient = await page.evaluate(() => updateClient(1));
-   //     const array = await page.evaluate(() => readClient());
-   //     await page.screenshot({ path: 'editar.png'})
-   //     await expect(array).toBeNull(1);
-   // })
+       const saveClient = await page.evaluate(() => saveClient.call());
+       const updateClient = await page.evaluate(() => updateClient(0));
+       const array = await page.evaluate(() => readClient());
+       await page.screenshot({ path: 'editar.png'})
+       await expect(array).toBeNull(0);
+   })
   
 })
  
